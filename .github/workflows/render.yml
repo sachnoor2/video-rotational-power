@@ -46,6 +46,9 @@ jobs:
           ffmpeg -y -f concat -safe 0 -i public/audio/list.txt -c copy out/narration.wav || true
           ffprobe -v error -show_entries format=duration,size -of default=nw=1 out/video.mp4
 
+      - name: Level the mix
+        run: python3 scripts/level.py
+
       - name: QA probe and frames
         run: python3 scripts/qa.py
 
