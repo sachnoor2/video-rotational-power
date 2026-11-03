@@ -1,0 +1,59 @@
+{
+  "fps": 30,
+  "engine": "kokoro",
+  "voice": "am_michael",
+  "lang": "en-us",
+  "speed": 1.0,
+  "pad": 0.75,
+  "minSeconds": 4.0,
+  "scenes": [
+    {
+      "id": "01-title",
+      "text": "Power in rotational dynamics. By the end, you will have derived one equation. Torque times angular velocity, built from nothing but work and time."
+    },
+    {
+      "id": "02-work",
+      "text": "Begin with work. A force pushing an object through a distance does work. That single idea is all we need to start."
+    },
+    {
+      "id": "03-power",
+      "text": "Power is how fast work happens. Work done, divided by the time it takes. Take force times distance, and divide by time. Distance over time is velocity."
+    },
+    {
+      "id": "04-linear",
+      "text": "So for straight line motion, power equals force times velocity. Keep that picture in mind. We are about to bend the straight line into a circle."
+    },
+    {
+      "id": "05-circle",
+      "text": "Now the body is pinned at a centre, and it turns. The force acts at some radius. Distance is replaced by angle, and we measure angle in radians."
+    },
+    {
+      "id": "06-torque",
+      "text": "Torque is force times the perpendicular distance from the axis. For a small turn, a point on the rim moves a small distance. Radius times the small angle."
+    },
+    {
+      "id": "07-work-rotation",
+      "text": "So the small amount of work is force times radius, times the small angle. Force times radius is torque. So work equals torque times the angle turned."
+    },
+    {
+      "id": "08-derive",
+      "text": "Now divide by the small time. Work over time is power. Angle over time is angular velocity. And there it is. Power equals torque times angular velocity."
+    },
+    {
+      "id": "09-units",
+      "text": "Check the units. Torque is newton metres. Angular velocity is radians per second. A radian is a pure number. So we are left with joules per second, the watt."
+    },
+    {
+      "id": "10-energy",
+      "text": "There is a second route. Rotational kinetic energy is one half times moment of inertia times angular velocity squared. Differentiate that in time. You get torque times angular velocity again."
+    },
+    {
+      "id": "11-example",
+      "text": "A motor delivers forty newton metres of torque at one hundred radians per second. Multiply them. Four thousand watts. That is four kilowatts."
+    },
+    {
+      "id": "12-recap",
+      "text": "So, from absolute basics. Work is torque times angle. Power is work per unit time. Therefore, power equals torque times angular velocity."
+    }
+  ]
+}

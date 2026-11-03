@@ -1,0 +1,18 @@
+{
+  "fps": 30,
+  "totalFrames": 3600,
+  "scenes": [
+    {"id": "01-title", "seconds": 9.0, "frames": 300},
+    {"id": "02-work", "seconds": 9.0, "frames": 300},
+    {"id": "03-power", "seconds": 9.0, "frames": 300},
+    {"id": "04-linear", "seconds": 9.0, "frames": 300},
+    {"id": "05-circle", "seconds": 9.0, "frames": 300},
+    {"id": "06-torque", "seconds": 9.0, "frames": 300},
+    {"id": "07-work-rotation", "seconds": 9.0, "frames": 300},
+    {"id": "08-derive", "seconds": 9.0, "frames": 300},
+    {"id": "09-units", "seconds": 9.0, "frames": 300},
+    {"id": "10-energy", "seconds": 9.0, "frames": 300},
+    {"id": "11-example", "seconds": 9.0, "frames": 300},
+    {"id": "12-recap", "seconds": 9.0, "frames": 300}
+  ]
+}
