@@ -103,7 +103,7 @@ const Power: React.FC<SceneProps> = ({dur}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const heights = [110, 150, 190, 235, 290].map((h, i) => {
-    const start = Math.round(dur * (0.2 + i * 0.09));
+    const start = Math.round(dur * (0.1 + i * 0.08));
     const p = spring({frame: frame - start, fps, config: {damping: 200, mass: 0.6}});
     return Math.max(3, h * p);
   });
@@ -259,7 +259,7 @@ const WorkRotation: React.FC<SceneProps> = ({dur}) => {
             ΔW = F × r × Δθ
           </Formula>
         </Rise>
-        <Rise delay={Math.round(dur * 0.52)}>
+        <Rise delay={Math.round(dur * 0.44)}>
           <div
             style={{
               marginTop: 24,
@@ -300,7 +300,7 @@ const Derive: React.FC<SceneProps> = ({dur}) => {
         <Rise delay={Math.round(dur * 0.36)}>
           <Note style={{marginTop: 26}}>angle over time is angular velocity, ω</Note>
         </Rise>
-        <Rise delay={Math.round(dur * 0.5)}>
+        <Rise delay={Math.round(dur * 0.44)}>
           <div
             style={{
               marginTop: 34,
@@ -411,15 +411,15 @@ const Example: React.FC<SceneProps> = ({dur}) => {
         </Rise>
         <div style={{display: 'flex', gap: 26, marginTop: 42}}>
           <Rise delay={Math.round(dur * 0.2)}>
-            <Card style={{width: 330}}>
+            <Card style={{width: 360}}>
               <div style={{fontSize: 22, color: palette.muted, fontWeight: 600}}>torque</div>
-              <div style={{fontFamily: serifFamily, fontSize: 58, marginTop: 8}}>40 N·m</div>
+              <div style={{fontFamily: serifFamily, fontSize: 50, marginTop: 8, whiteSpace: 'nowrap'}}>40 N·m</div>
             </Card>
           </Rise>
           <Rise delay={Math.round(dur * 0.34)}>
-            <Card style={{width: 330}}>
+            <Card style={{width: 400}}>
               <div style={{fontSize: 22, color: palette.muted, fontWeight: 600}}>angular velocity</div>
-              <div style={{fontFamily: serifFamily, fontSize: 58, marginTop: 8}}>100 rad/s</div>
+              <div style={{fontFamily: serifFamily, fontSize: 50, marginTop: 8, whiteSpace: 'nowrap'}}>100 rad/s</div>
             </Card>
           </Rise>
         </div>
@@ -464,7 +464,7 @@ const Recap: React.FC<SceneProps> = ({dur}) => {
             power = work / time
           </Formula>
         </Rise>
-        <Rise delay={Math.round(dur * 0.52)}>
+        <Rise delay={Math.round(dur * 0.38)}>
           <div
             style={{
               marginTop: 30,
