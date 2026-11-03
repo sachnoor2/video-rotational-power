@@ -65,10 +65,16 @@ export const Disc: React.FC<{
 
       {showAngle ? (
         <>
-          <path d={arcPath(c, c, R * 0.46, 0, a)} fill="none" stroke={palette.amberDeep} strokeWidth={5} strokeLinecap="round" />
+          <path
+            d={arcPath(c, c, R * 0.46, 0, Math.min(a, Math.PI * 1.9))}
+            fill="none"
+            stroke={palette.amberDeep}
+            strokeWidth={5}
+            strokeLinecap="round"
+          />
           <text
-            x={c + R * 0.6 * Math.cos(a / 2)}
-            y={c + R * 0.6 * Math.sin(a / 2) + 12}
+            x={c + R * 0.6 * Math.cos(Math.min(a, Math.PI * 1.9) / 2)}
+            y={c + R * 0.6 * Math.sin(Math.min(a, Math.PI * 1.9) / 2) + 12}
             fontFamily={serifFamily}
             fontSize={labelSize}
             fill={palette.amberDeep}
@@ -82,11 +88,12 @@ export const Disc: React.FC<{
         <>
           <line x1={c} y1={c} x2={px} y2={py} stroke={palette.ink} strokeWidth={5} strokeLinecap="round" />
           <text
-            x={c + R * 0.5 * Math.cos(a) - 10}
-            y={c + R * 0.5 * Math.sin(a) - 18}
+            x={c + R * 0.55 * Math.cos(a) - Math.sin(a) * 34}
+            y={c + R * 0.55 * Math.sin(a) + Math.cos(a) * 34 + labelSize * 0.35}
             fontFamily={serifFamily}
             fontSize={labelSize}
             fill={palette.ink}
+            textAnchor="middle"
           >
             {radiusLabel}
           </text>
@@ -159,12 +166,12 @@ export const Bars: React.FC<{heights: number[]; accent?: string; caption?: strin
   accent = palette.indigo,
   caption,
 }) => {
-  const w = 88;
-  const gap = 26;
+  const w = 80;
+  const gap = 24;
   const base = 340;
   return (
-    <svg width={560} height={420} viewBox="0 0 560 420">
-      <line x1={30} y1={base} x2={530} y2={base} stroke={palette.rule} strokeWidth={4} strokeLinecap="round" />
+    <svg width={660} height={420} viewBox="0 0 660 420">
+      <line x1={30} y1={base} x2={620} y2={base} stroke={palette.rule} strokeWidth={4} strokeLinecap="round" />
       {heights.map((h, i) => (
         <rect
           key={i}

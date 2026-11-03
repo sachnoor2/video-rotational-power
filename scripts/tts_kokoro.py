@@ -5,7 +5,9 @@ Scene length is derived from the measured WAV, never typed by hand:
 """
 import argparse
 import json
+import math
 import os
+import subprocess
 import wave
 
 import numpy as np
@@ -21,6 +23,58 @@ def write_wav(path, samples, sample_rate):
         handle.setframerate(int(sample_rate))
         handle.writeframes(data.tobytes())
     return len(data) / float(sample_rate)
+
+
+def read_pcm(path):
+    with wave.open(path, "rb") as handle:
+        rate = handle.getframerate()
+        frames = handle.readframes(handle.getnframes())
+    return np.frombuffer(frames, dtype=np.int16), rate
+
+
+def write_pcm(path, data, sample_rate):
+    with wave.open(path, "wb") as handle:
+        handle.setnchannels(1)
+        handle.setsampwidth(2)
+        handle.setframerate(int(sample_rate))
+        handle.writeframes(data.astype(np.int16).tobytes())
+
+
+def loudnorm(path, sample_rate):
+    """Bring every scene to the same perceived level with ffmpeg loudnorm."""
+    tmp = path + ".norm.wav"
+    result = subprocess.run(
+        [
+            "ffmpeg", "-y", "-loglevel", "error", "-i", path,
+            "-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
+            "-ar", str(int(sample_rate)), "-ac", "1", tmp,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode == 0 and os.path.exists(tmp):
+        os.replace(tmp, path)
+        return True
+    print("loudnorm skipped: %s" % (result.stderr or "").strip()[:160])
+    return False
+
+
+def match_level(path, target_rms_db=-19.0, ceiling_db=-1.5):
+    """Safety net: trim or lift the scene so its speech sits in the QA window."""
+    data, rate = read_pcm(path)
+    if data.size == 0:
+        return
+    x = data.astype(np.float64) / 32768.0
+    rms = float(np.sqrt(np.mean(x ** 2)))
+    peak = float(np.max(np.abs(x)))
+    if rms <= 1e-6 or peak <= 1e-6:
+        return
+    gain = 10 ** (target_rms_db / 20.0) / rms
+    gain = min(gain, 10 ** (ceiling_db / 20.0) / peak)
+    if abs(20.0 * math.log10(gain)) < 0.2:
+        return
+    scaled = np.clip(x * gain, -1.0, 1.0) * 32767.0
+    write_pcm(path, scaled, rate)
 
 
 def pad_wav(path, sample_rate, target_seconds):
@@ -74,11 +128,12 @@ def main():
 
         if text:
             samples, sample_rate = kokoro.create(text, voice=voice, speed=speed, lang=lang)
-            seconds = write_wav(out_path, samples, sample_rate)
+            write_wav(out_path, samples, sample_rate)
+            loudnorm(out_path, sample_rate)
+            match_level(out_path)
         else:
             sample_rate = 24000
             write_wav(out_path, np.zeros(int(sample_rate * min_seconds), dtype=np.float32), sample_rate)
-            seconds = min_seconds
 
         seconds = pad_wav(out_path, sample_rate, min_seconds)
         frames = int(round((seconds + pad) * fps))

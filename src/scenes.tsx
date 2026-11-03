@@ -41,7 +41,7 @@ const Title: React.FC<SceneProps> = ({dur}) => {
             Derived from absolute basics
           </div>
         </Rise>
-        <Rise delay={Math.round(dur * 0.5)}>
+        <Rise delay={Math.round(dur * 0.42)}>
           <div
             style={{
               marginTop: 56,
@@ -249,17 +249,17 @@ const WorkRotation: React.FC<SceneProps> = ({dur}) => {
         <Rise delay={10}>
           <Body style={{marginTop: 24}}>Work is force times the distance moved along the rim.</Body>
         </Rise>
-        <Rise delay={Math.round(dur * 0.3)}>
+        <Rise delay={Math.round(dur * 0.22)}>
           <Formula size={54} color={palette.inkSoft} style={{marginTop: 38}}>
             ΔW = F × Δs
           </Formula>
         </Rise>
-        <Rise delay={Math.round(dur * 0.48)}>
+        <Rise delay={Math.round(dur * 0.36)}>
           <Formula size={54} color={palette.inkSoft} style={{marginTop: 14}}>
             ΔW = F × r × Δθ
           </Formula>
         </Rise>
-        <Rise delay={Math.round(dur * 0.66)}>
+        <Rise delay={Math.round(dur * 0.52)}>
           <div
             style={{
               marginTop: 24,
@@ -297,10 +297,10 @@ const Derive: React.FC<SceneProps> = ({dur}) => {
             <Formula size={62}>τ × Δθ / Δt</Formula>
           </div>
         </Rise>
-        <Rise delay={Math.round(dur * 0.45)}>
+        <Rise delay={Math.round(dur * 0.36)}>
           <Note style={{marginTop: 26}}>angle over time is angular velocity, ω</Note>
         </Rise>
-        <Rise delay={Math.round(dur * 0.62)}>
+        <Rise delay={Math.round(dur * 0.5)}>
           <div
             style={{
               marginTop: 34,
@@ -333,13 +333,13 @@ const Units: React.FC<SceneProps> = ({dur}) => {
 
   return (
     <Stage kicker="Check · units">
-      <div style={{flex: 1}}>
+      <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
         <Rise>
           <Heading size={62}>The units must agree</Heading>
         </Rise>
         <div style={{display: 'flex', gap: 26, marginTop: 46}}>
           {items.map((item, i) => (
-            <Rise key={item.label} delay={Math.round(dur * (0.22 + i * 0.16))}>
+            <Rise key={item.label} delay={Math.round(dur * (0.14 + i * 0.12))}>
               <Card style={{width: 400, height: 250}}>
                 <div style={{fontSize: 20, letterSpacing: '0.16em', textTransform: 'uppercase', color: palette.muted, fontWeight: 700}}>
                   {item.label}
@@ -361,7 +361,7 @@ const Units: React.FC<SceneProps> = ({dur}) => {
 /* 10 ------------------------------------------------------------------ */
 const Energy: React.FC<SceneProps> = ({dur}) => {
   const frame = useCurrentFrame();
-  const rotation = 10 + frame * 0.9;
+  const rotation = 10 + frame * 0.3;
 
   return (
     <Stage kicker="Second route · energy">
